@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autres - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    
+    <nav class="nav-main">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Accueil</a></li>
+                <li><a href="BUT_R_T.html" class="nav-link">BUT</a></li>
+                <li><a href="CTF.html" class="nav-link">CTF</a></li>
+                <li><a href="Expériences.html" class="nav-link">Expériences</a></li>
+                <li><a href="Autre.html" class="nav-link active">Autres</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <div class="section">
+            <div class="page-header">
+                <h1 class="page-title">À propos & Contact</h1>
+                <p class="page-subtitle">Informations complémentaires et moyens de me contacter</p>
+            </div>
+
+            <section style="margin-bottom: 4rem;">
+                <h2 class="section-title">À propos de moi</h2>
+                
+                <div class="card" style="max-width: 800px; margin: 0 auto;">
+                    <p class="card-description" style="font-size: 1.1rem; line-height: 1.9;">
+                        Étudiant passionné par la cybersécurité et les réseaux, je suis actuellement en deuxième année de BUT Réseaux & Télécommunications à l'IUT de Colmar. 
+                        Mon parcours m'a permis de développer des compétences techniques solides en configuration d'équipements, administration système et réseaux, ainsi qu'en développement Python.
+                    </p>
+                    <p class="card-description" style="font-size: 1.1rem; line-height: 1.9; margin-top: 1rem;">
+                        Participant actif aux CTF et challenges sur des plateformes comme TryHackMe et HackTheBox, j'aime apprendre continuellement. 
+                        Je rejoindrai l'école 18.06 de Molsheim dès l'année prochaine en Mastère Cyberdéfense pour devenir expert en protection des systèmes et en pentesting.
+                    </p>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 4rem;">
+                <h2 class="section-title">Centres d'intérêt</h2>
+                
+                <div class="grid-2-cols">
+                    <div class="card">
+                        <h3 class="card-title">🔐 Cybersécurité</h3>
+                        <p class="card-description">
+                            Pratique régulière de challenges sur TryHackMe et HackTheBox. Je réalise actuellement une préparation autodidacte pour la certification CWES (Certified Web Exploitation Specialist).
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">🎸 Musique</h3>
+                        <p class="card-description">
+                            Pratique de la guitare classique et électrique depuis plus de 7 ans. J'ai également une expérience d'un an en orchestre, ce qui m'a appris la rigueur et le travail de groupe.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">🎓 Apprentissage continu</h3>
+                        <p class="card-description">
+                            Veille technologique permanente sur les dernières vulnérabilités et entraînement sur des environnements virtuels.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">🌐 Engagement technique</h3>
+                        <p class="card-description">
+                            Participation à des CTF en équipe pour progresser sur l'exploitation de vulnérabilités web et système.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 4rem;">
+                <h2 class="section-title">Me contacter</h2>
+                
+                <div class="grid-2-cols" style="max-width: 900px; margin: 0 auto;">
+                    <a href="mailto:roeszalderic@gmail.com" class="card" style="text-decoration: none; color: inherit;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 2rem;">📧</div>
+                            <div>
+                                <h3 class="card-title">Email</h3>
+                                <p class="card-description" style="margin: 0;">roeszalderic@gmail.com</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/alderic-roesz/" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 2rem;">💼</div>
+                            <div>
+                                <h3 class="card-title">LinkedIn</h3>
+                                <p class="card-description" style="margin: 0;">in/alderic-roesz</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">Documents</h2>
+                
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <a href="documents/CV_Alderic_ROESZ.pdf" target="_blank" class="card" style="text-decoration: none; color: inherit; display: block; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📄</div>
+                        <h3 class="card-title">Télécharger mon CV</h3>
+                        <p class="card-description">Format PDF • Profil BUT R&T Spécialité Cybersécurité</p>
+                        <div class="card-tags" style="justify-content: center;">
+                            <span class="tag">CV</span>
+                            <span class="tag">PDF</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Aldéric ROESZ</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

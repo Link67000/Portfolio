@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUT 1 - Portfolio Aldéric ROESZ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* FIX : Permet de cliquer et sélectionner le texte à travers l'animation */
+        #particles-canvas {
+            pointer-events: none;
+            z-index: -1 !important;
+        }
+
+        /* MISE EN PAGE AVEC SIDEBAR (ASIDE) */
+        .but-layout {
+            display: flex;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+            padding: 2rem;
+        }
+
+        /* Navigation latérale fixe */
+        .quick-nav-aside {
+            width: 250px;
+            position: sticky;
+            top: 100px; /* Aligné sous la navbar principale */
+            height: fit-content;
+            background: var(--color-bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            flex-shrink: 0;
+        }
+
+        .quick-nav-title {
+            color: var(--color-accent);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .quick-nav-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .quick-nav-link {
+            display: block;
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .quick-nav-link:hover {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-accent);
+            transform: translateX(5px);
+        }
+
+        /* Conteneur principal */
+        .sae-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+            padding-bottom: 80vh; 
+        }
+
+        .card-full {
+            width: 100%;
+            background: var(--color-bg-secondary);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            line-height: 1.8;
+            scroll-margin-top: 100px; 
+            user-select: text;
+        }
+
+        .card-title {
+            color: var(--color-accent);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            font-family: var(--font-mono);
+        }
+
+        .section-label {
+            font-weight: bold;
+            color: var(--color-text-primary);
+            margin-top: 2rem;
+            display: block;
+            font-size: 1.1rem;
+            text-decoration: underline;
+            text-decoration-color: var(--color-accent);
+            text-underline-offset: 4px;
+        }
+
+        .ac-box {
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            background: rgba(16, 185, 129, 0.03);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .ac-item {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .ac-code {
+            color: var(--color-accent);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .sae-image-container {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .sae-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-accent);
+            text-decoration: none;
+            border-radius: 6px;
+            border: 1px solid var(--color-accent);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .download-btn:hover {
+            background: var(--color-accent);
+            color: #000;
+        }
+
+        .intro-ps {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+            margin-bottom: 4rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 1100px) {
+            .but-layout { flex-direction: column; }
+            .quick-nav-aside { width: 100%; position: relative; top: 0; }
+            .quick-nav-list { flex-direction: row; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    
+    <nav class="nav-main">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Accueil</a></li>
+                <li><a href="BUT_R_T.html" class="nav-link active">BUT</a></li>
+                <li><a href="CTF.html" class="nav-link">CTF</a></li>
+                <li><a href="Expériences.html" class="nav-link">Expériences</a></li>
+                <li><a href="Autre.html" class="nav-link">Autres</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <div class="section">
+            <div class="page-header">
+                <h1 class="page-title">Première Année de BUT R&T</h1>
+                <p class="page-subtitle">Détail complet des Situations d'Apprentissage et d'Évaluation</p>
+            </div>
+
+            <div class="but-layout">
+                <aside class="quick-nav-aside">
+                    <div class="quick-nav-title">SAE à voir :</div>
+                    <ul class="quick-nav-list">
+                        <li><a href="#sae101" class="quick-nav-link">SAE 1.01</a></li>
+                        <li><a href="#sae102" class="quick-nav-link">SAE 1.02</a></li>
+                        <li><a href="#sae103" class="quick-nav-link">SAE 1.03</a></li>
+                        <li><a href="#sae104" class="quick-nav-link">SAE 1.04</a></li>
+                        <li><a href="#sae105" class="quick-nav-link">SAE 1.05</a></li>
+                        <li><a href="#sae201" class="quick-nav-link">SAE 2.01</a></li>
+                        <li><a href="#sae202" class="quick-nav-link">SAE 2.02</a></li>
+                        <li><a href="#sae203" class="quick-nav-link">SAE 2.03</a></li>
+                    </ul>
+                </aside>
+
+                <div class="sae-container">
+                    
+                    <div class="intro-ps">
+                        Comme les 3 Compétences (UE) sont reprises dans la deuxième année j'ai décider de les présenter dans la page suivante dédiée à cette seconde année où je reviens aussi sur des éléments de la première année qui reprenne ces compétences.
+                    </div>
+
+                    <article class="card-full" id="sae101">
+                        <h2 class="card-title">SAE 1.01 : Initiation Cybersécurité</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Cette SAE est la première SAE de cette première année en R&T. Elle avait pour objectif de nous introduire au domaine de la cybersécurité. Lors de ce projet, nous étions en groupe. Nous avons donc dû nous répartir le travail pour mettre en place et organiser nos recherches.</p>
+                        
+                        <span class="section-label">Groupe :</span>
+                        <p>Hamed Al-Abri, Erwann Fischer, Aldéric Roesz</p>
+
+                        <span class="section-label">But :</span>
+                        <p>Le devoir demandé pour ce projet était une vidéo de présentation de notre sujet ainsi qu'une présentation de 10 minutes en groupe. Chacun des groupes avait un sujet différent pour pouvoir faire le tour des sujets liés à la cybersécurité. Pour notre part, notre sujet était "Les virus, les chevaux de Troie et les spywares, comment s'en protéger ?".</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Lors des premières séances, nous avons préparé un plan pour organiser facilement nos recherches ainsi que la répartition des tâches pour la présentation et la vidéo. Une fois ce plan fait, nous avons commencé le travail de recherche. Ayant un cours d'introduction à cette SAE contenant des informations utiles à notre sujet, nous nous sommes basés en partie sur ce cours. Pour ce qui est du reste, nos sources viennent de chaînes YouTube dédiées à la cybersécurité.</p>
+
+                        <span class="section-label">Autres :</span>
+                        <p>Vous retrouverez ci-dessous nos annexes contenant notre diaporama de la présentation.</p>
+                        <a href="documents/SAE11 - Hygiène Informatique.pptx.1.pptx" class="download-btn" download>
+                            📥 Télécharger le diaporama (PPTX)
+                        </a>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC11.02</span> Comprendre l'architecture et les fondements des systèmes numériques, les principes du codage de l'information, des communications et de l'Internet.</li>
+                                <li class="ac-item"><span class="ac-code">AC12.05</span> Communiquer avec un tiers (client, collaborateur...) et adapter son discours et sa langue à son interlocuteur.</li>
+                                <li class="ac-item"><span class="ac-code">AC13.06</span> S’intégrer dans un environnement propice au développement et au travail collaboratif.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card-full" id="sae102">
+                        <h2 class="card-title">SAE 1.02 : Configuration Réseau</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Cette SAE a pour but de nous faire réaliser une configuration réseau, incluant la mise en place de routeurs, de switches ainsi que la configuration d'un serveur Linux. Ce serveur Linux avait pour objectif de donner une configuration DHCP aux PC du réseau. Ce projet était à réaliser seul.</p>
+                        
+                        <p>Voici la configuration demandée :</p>
+                        <div class="sae-image-container">
+                            <img src="images/SAE1.02 config.png" alt="Configuration réseau">
+                        </div>
+                        
+                        <p>Preuve de configuration du serveur Linux :</p>
+                        <div class="sae-image-container">
+                            <img src="images/SAE1.02 preuve config.png" alt="Preuve DHCP">
+                        </div>
+
+                        <span class="section-label">But :</span>
+                        <p>Le but de cette SAE était de reconstituer un réseau d'une petite entreprise. Nous avions donc créé différents VLAN avec des PC représentant ces VLAN. Nous avons dû configurer les switches et le routeur pour correspondre aux attentes de l'entreprise. Vous trouverez en annexe le cahier des charges de cette SAE pour plus d'informations.</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Pour l'organisation de cette SAE, nous avons commencé avec un cours d'introduction à eveNG (Emulated Virtual Environment Next Generation), qui est l'environnement sur lequel nous avons travaillé tout au long de ce projet. Nous sommes ensuite directement passés à la découverte et à la mise en place du cahier des charges.</p>
+
+                        <span class="section-label">Autres :</span>
+                        <p>Vous retrouverez en bas de page mes annexes contenant le cahier des charges du projet, ainsi que mes configurations de routeur et de switch demandées lors des rendus de cette SAE.</p>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC11.03</span> Configurer les fonctions de base du réseau local.</li>
+                                <li class="ac-item"><span class="ac-code">AC11.04</span> Maîtriser les rôles et les principes fondamentaux des systèmes d’exploitation afin d’interagir avec ceux-ci pour la configuration et l'administration des réseaux et services fournis.</li>
+                                <li class="ac-item"><span class="ac-code">AC11.06</span> Installer un poste client, expliquer la procédure mise en place.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card-full" id="sae103">
+                        <h2 class="card-title">SAE 1.03 : Mesures Télécoms</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Cette SAE a été réalisée dans le but de concrétiser nos cours en télécommunication. Nous avons effectué des mesures à l'aide d'applications telles qu'Acrylic. Nous avons aussi réalisé une soutenance ainsi qu'un rapport pour présenter nos résultats.</p>
+                        
+                        <span class="section-label">Groupe :</span>
+                        <p>Loic Maurer, Richard Martin, Corentin Boeglin, Aldéric Roesz</p>
+
+                        <span class="section-label">But :</span>
+                        <p>Le devoir demandé pour ce projet était la mise en place d'un point d'accès (AP) ainsi que la capacité à mesurer et analyser des données. Nous avons donc mesuré les données sur un AP en 2.4 GHz et 5 GHz. Nous devions aussi réaliser une Heatmap d'un bâtiment ainsi que de la bibliothèque universitaire pour représenter schématiquement les valeurs des AP des bâtiments.</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Dès la première séance, nous nous sommes répartis les tâches en deux groupes de deux. Un des groupes s'occupait de réaliser les mesures des AP tandis que l'autre réalisait les Heatmaps. Nous avions pas mal d'avance lors de cette SAE, ce qui nous a permis de parfaitement peaufiner le travail.</p>
+
+                        <span class="section-label">Autres :</span>
+                        <p>Vous retrouverez ci-dessous notre rapport de projet contenant tout le travail réalisé ainsi que nos schémas et explications.</p>
+                        <a href="documents/Rapport_SAE_13.docx.1.docx" class="download-btn" download>
+                            📥 Télécharger le Rapport (DOCX)
+                        </a>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC12.01</span> Mesurer, analyser et commenter les signaux.</li>
+                                <li class="ac-item"><span class="ac-code">AC12.03</span> Déployer des supports de transmission.</li>
+                                <li class="ac-item"><span class="ac-code">AC12.05</span> Communiquer avec un tiers (client, collaborateur...) et adapter son discours et sa langue à son interlocuteur.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card-full" id="sae104">
+                        <h2 class="card-title">SAE 1.04 : Site Web Statique</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Cette SAE avait pour but de nous faire réaliser notre premier site web statique. Elle fait suite à nos cours HTML et CSS que nous avons eus au début de notre première année. Cette SAE était un travail à faire seul.</p>
+                        
+                        <div class="sae-image-container">
+                            <img src="images/SAE 1.04 site.png" alt="Capture site statique">
+                        </div>
+
+                        <span class="section-label">But :</span>
+                        <p>L'objectif était de réaliser un site web ayant pour but de nous présenter. Nous devions respecter l'utilisation d'un seul fichier CSS pour toutes les pages HTML et trouver un moyen d'héberger le site en ligne. Le site devait contenir des liens vers les autres pages ainsi qu'une vidéo, une image et un enregistrement audio.</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Lors des premières séances, je me suis organisé pour créer les pages, lier le CSS à toutes les pages et déterminer le contenu de chacune des pages web. Ensuite, je devais rendre le site esthétique et le compléter avec des textes, des images, une vidéo, etc.</p>
+
+                        <span class="section-label">Autres :</span>
+                        <p>Vous retrouverez mon site web sur le lien suivant : <a href="https://link67000.github.io" target="_blank" style="color: var(--color-accent);">Presentation Aldéric</a></p>
+                        <p>NB : N'ayant pas de media queries demandées (adaptation des pages selon la taille de l'écran), il se peut que le site contienne quelques problèmes.</p>
+                        <p>PS : Le site n'est plus en ligne ! par contre vous pouvez toujours télécharger les fichiers du sites sur le GitHub et aller l'explorer sur votre navigateur en local.</p>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC13.01</span> Utiliser un système informatique et ses outils.</li>
+                                <li class="ac-item"><span class="ac-code">AC13.04</span> Connaître l’architecture et les technologies d’un site Web.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card-full" id="sae105">
+                        <h2 class="card-title">SAE 1.05 : Attaque Man-in-the-Middle</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Cette SAE est la dernière réalisée lors de notre premier semestre de première année en R&T. Elle avait pour but de nous introduire au réseau ainsi qu'à la cybersécurité en réalisant une attaque de l'homme du milieu.</p>
+                        
+                        <span class="section-label">Groupe :</span>
+                        <p>Loic Maurer, Aldéric Roesz</p>
+
+                        <span class="section-label">But :</span>
+                        <p>Tout d'abord, l'objectif était de réaliser quatre programmes pour effectuer une découverte active et une découverte passive. Ensuite, nous sommes passés à l'attaque de l'homme du milieu que nous avons réalisée sur VM.</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Notre première séance était une séance encadrée pour la prise en main de Scapy. Dès les prochains cours, nous étions en autonomie pour réaliser les devoirs demandés.</p>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC11.02</span> Comprendre l'architecture et les fondements des systèmes numériques, les principes du codage de l'information, des communications et de l'Internet.</li>
+                                <li class="ac-item"><span class="ac-code">AC13.02</span> Lire, exécuter, corriger et modifier un programme.</li>
+                                <li class="ac-item"><span class="ac-code">AC13.03</span> Traduire un algorithme, dans un langage et pour un environnement donné.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <hr style="opacity: 0.1; margin: 2rem 0;">
+
+                    <article class="card-full" id="sae201">
+                        <h2 class="card-title">SAE 2.01 : Maquette GNS3</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Lors de cette SAE, nous avons dû réaliser une maquette GNS3 d'un réseau. Nous avons utilisé nos compétences pour mettre en œuvre du spanning-tree, des ACL, l'installation d'Apache2 ainsi que Rsync.</p>
+
+                        <div class="sae-image-container">
+                            <img src="images/SAE 2.01 reseau.png" alt="Maquette GNS3">
+                        </div>
+
+                        <span class="section-label">But :</span>
+                        <p>L'objectif était de faire fonctionner les pings entre chacun des VLANs de cette maquette et de réussir à lier nos maquettes avec celles d'un autre élève pour que les réseaux puissent se pinguer mutuellement.</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Comme pour la plupart des SAE, nous avions eu un cours d'introduction à GNS3. Son utilisation nécessite le téléchargement d'images pour les switches et les routeurs. Dès la première séance d'autonomie, nous avons commencé à suivre le cahier des charges. À chaque séance, nous étions suivis par un test Moodle.</p>
+
+                        <span class="section-label">Autres :</span>
+                        <p>Vous retrouverez ci-dessous le cahier des charges pour mieux comprendre les attentes de la SAE.</p>
+                        <a href="documents/SAE_2.1.pdf.1.pdf" class="download-btn" download>
+                            📥 Télécharger le cahier des charges (PDF)
+                        </a>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC11.03</span> Configurer les fonctions de base du réseau local.</li>
+                                <li class="ac-item"><span class="ac-code">AC11.04</span> Maîtriser les rôles et les principes fondamentaux des systèmes d’exploitation afin d’interagir avec ceux-ci pour la configuration et l'administration des réseaux et services fournis.</li>
+                                <li class="ac-item"><span class="ac-code">AC11.05</span> Identifier les dysfonctionnements du réseau local et savoir les signaler.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card-full" id="sae202">
+                        <h2 class="card-title">SAE 2.02 : Domotique Arduino</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>La SAE 2.2 est un projet en duo ayant pour but de nous introduire à Arduino sous Tinkercad. Il fait suite à nos cours sur la FFT (Fast Fourier Transform) où nous avons dû faire de l'analyse de signal.</p>
+                        
+                        <span class="section-label">Groupe :</span>
+                        <p>Quentin Milhau, Aldéric Roesz</p>
+
+                        <span class="section-label">But :</span>
+                        <p>Le travail demandé consistait en quatre programmes différents. Le premier avait pour but de jouer une simple note et d'allumer la LED correspondant à la fréquence de la note. Le second devait nous faire jouer "Au clair de la lune". Pour le troisième, nous avons réalisé un piano à l'aide de boutons poussoirs tout en allumant les LED en fonction des fréquences. Pour finir, nous devions jouer un mot de passe secret avec les boutons poussoirs pour allumer une LED.</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Pour l'organisation de notre groupe, nous avons chacun travaillé sur les mêmes programmes afin que nous ayons tous les deux les bases nécessaires pour les évaluations de fin de SAE. Cela ne nous a pas empêchés de terminer la SAE dans les temps.</p>
+
+                        <span class="section-label">Autres :</span>
+                        <p>Vous retrouverez en bas de page notre rapport de projet contenant tout le travail réalisé ainsi que nos schémas et explications.</p>
+                        <div class="sae-image-container">
+                            <img src="images/SAE 2.02.png" alt="Schéma Arduino">
+                        </div>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC11.01</span> Maîtriser les lois fondamentales de l’électricité afin d’intervenir sur des équipements de réseaux et télécommunications.</li>
+                                <li class="ac-item"><span class="ac-code">AC13.02</span> Lire, exécuter, corriger et modifier un programme.</li>
+                                <li class="ac-item"><span class="ac-code">AC13.03</span> Traduire un algorithme, dans un langage et pour un environnement donné.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card-full" id="sae203">
+                        <h2 class="card-title">SAE 2.03 : Web Dynamique</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Cette SAE fait suite à nos cours sur le web dynamique ainsi qu'à l'utilisation des CRUD (CREATE, READ, UPDATE, DELETE). Nous avons dû, en groupe, créer un site web sur un thème donné. Pour notre part, le sujet était de créer un site web pour la gestion des absences.</p>
+                        
+                        <span class="section-label">Groupe :</span>
+                        <p>Korichi Yanis, Winling Matéo, Roesz Aldéric</p>
+
+                        <span class="section-label">But :</span>
+                        <p>Dans cette SAE, nous devions créer les CRUD, mettre en place des squelettes pour chacune des pages HTML, créer une base de données sur une VM Windows à l'aide de MySQL, et publier le site web à l'aide d'Apache 2. À la fin de cette configuration, nous avons également mis en place un générateur de PDF sur le site pour récupérer les absences des élèves et un CSV pour importer des absences dans la base de données depuis un fichier texte.</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Lors de la première séance, nous avons créé un fichier GanttProject pour organiser notre travail et éviter de perdre du temps sur la répartition des tâches lors des prochaines séances. Dès la seconde séance, nous avons attaqué la mise en place des CRUD et des squelettes. Pour ma part, mes collègues se sont occupés de gérer les schémas de la base de données.</p>
+
+                        <span class="section-label">Autres :</span>
+                        <p>Voici notre GitHub où vous retrouverez tout le travail fait lors de cette SAE : <a href="https://github.com/Link67000/SAE_WEBdynamique" target="_blank" style="color: var(--color-accent);">GitHub SAE Web Dynamique</a></p>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC13.04</span> Connaître l’architecture et les technologies d’un site Web.</li>
+                                <li class="ac-item"><span class="ac-code">AC13.05</span> Choisir les mécanismes de gestion de données adaptés au développement de l’outil et argumenter ses choix.</li>
+                                <li class="ac-item"><span class="ac-code">AC13.06</span> S’intégrer dans un environnement propice au développement et au travail collaboratif.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Aldéric ROESZ - IUT de Colmar</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

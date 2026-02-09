@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcours BUT R&T - Portfolio Aldéric ROESZ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .competence-list {
+            margin-top: 1rem;
+            padding-left: 1.2rem;
+            list-style-type: none;
+        }
+        .competence-list li {
+            position: relative;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+        .competence-list li::before {
+            content: "▹";
+            position: absolute;
+            left: -1.2rem;
+            color: var(--color-accent);
+        }
+        .competence-title {
+            font-weight: bold;
+            color: var(--color-text-primary);
+            display: block;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    
+    <nav class="nav-main">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Accueil</a></li>
+                <li><a href="BUT_R_T.html" class="nav-link active">BUT</a></li>
+                <li><a href="CTF.html" class="nav-link">CTF</a></li>
+                <li><a href="Expériences.html" class="nav-link">Expériences</a></li>
+                <li><a href="Autre.html" class="nav-link">Autres</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <div class="section">
+            <div class="page-header">
+                <h1 class="page-title">Mon Parcours en BUT R&T</h1>
+                <p class="page-subtitle">Réseaux & Télécommunications • Spécialité Cybersécurité</p>
+            </div>
+
+            <div class="card" style="margin-bottom: 3rem;">
+                <h2 class="card-title">Formation à l'IUT de Colmar</h2>
+                <p class="card-description">
+                    Mon cursus en Réseaux et Télécommunications m'a permis d'acquérir une base technique solide, allant de l'administration système à la configuration réseau complexe. À partir de la deuxième année, je me suis spécialisé dans le parcours <strong>Cybersécurité</strong> pour approfondir les techniques de protection et de test d'intrusion.
+                </p>
+            </div>
+
+            <div class="grid-2-cols" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+                
+                <div class="card">
+                    <div class="timeline-date">Sept 2023 - Juin 2024</div>
+                    <h3 class="card-title">BUT 1 : Fondamentaux</h3>
+                    
+                    <span class="competence-title">Compétences cibles :</span>
+                    <ul class="competence-list">
+                        <li>Assister l’administrateur du réseau</li>
+                        <li>Découvrir les transmissions et la ToIP</li>
+                        <li>S’intégrer dans un service informatique</li>
+                    </ul>
+
+                    <div class="card-tags" style="margin-top: 1.5rem;">
+                        <span class="tag">SAE 1.01 à 2.03</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">GNS3</span>
+                    </div>
+                    <a href="BUT1.html" class="view-profile-btn" style="display: inline-block; margin-top: 1rem;">Voir les projets →</a>
+                </div>
+
+                <div class="card">
+                    <div class="timeline-date">Sept 2024 - Juin 2025</div>
+                    <h3 class="card-title">BUT 2 : Spécialisation Cyber</h3>
+                    
+                    <span class="competence-title">Compétences cibles :</span>
+                    <ul class="competence-list">
+                        <li>Administrer un réseau</li>
+                        <li>Connecter les entreprises et les usagers</li>
+                        <li>Développer une application R&T</li>
+                        <li>Sensibiliser aux vulnérabilités d'un SI</li>
+                        <li>Outils de surveillance et de test du SI</li>
+                    </ul>
+
+                    <div class="card-tags" style="margin-top: 1.5rem;">
+                        <span class="tag">SAE 3.01 à 4.01</span>
+                        <span class="tag">Pentest</span>
+                        <span class="tag">Python</span>
+                    </div>
+                    <a href="BUT2.html" class="view-profile-btn" style="display: inline-block; margin-top: 1rem;">Voir les projets →</a>
+                </div>
+
+                <div class="card">
+                    <div class="timeline-date">Sept 2025 - 2026</div>
+                    <h3 class="card-title">BUT 3 : Expertise & Stage</h3>
+                    
+                    <span class="competence-title">Compétences cibles :</span>
+                    <ul class="competence-list">
+                        <li>Concevoir un réseau</li>
+                        <li>Déployer une solution de connexion ou IP</li>
+                        <li>Piloter un projet de développement R&T</li>
+                        <li>Mettre en œuvre un SI sécurisé</li>
+                        <li>Surveillance d’incidents de sécurité</li>
+                    </ul>
+
+                    <div class="card-tags" style="margin-top: 1.5rem;">
+                        <span class="tag">Cyberdéfense</span>
+                        <span class="tag">Stage AIRT</span>
+                    </div>
+                    <a href="BUT3.html" class="view-profile-btn" style="display: inline-block; margin-top: 1rem;">En cours... →</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Aldéric ROESZ - Université de Haute-Alsace</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
