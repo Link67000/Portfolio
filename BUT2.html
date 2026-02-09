@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUT 2 - Portfolio Aldéric ROESZ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* FIX : Permet l'interaction avec le contenu à travers le fond */
+        #particles-canvas {
+            pointer-events: none;
+            z-index: -1 !important;
+        }
+
+        /* MISE EN PAGE AVEC SIDEBAR (ASIDE) */
+        .but-layout {
+            display: flex;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+            padding: 2rem;
+        }
+
+        /* Navigation latérale fixe */
+        .quick-nav-aside {
+            width: 250px;
+            position: sticky;
+            top: 100px; /* Aligné sous la navbar principale */
+            height: fit-content;
+            background: var(--color-bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            flex-shrink: 0;
+        }
+
+        .quick-nav-title {
+            color: var(--color-accent);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .quick-nav-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .quick-nav-link {
+            display: block;
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .quick-nav-link:hover {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-accent);
+            transform: translateX(5px);
+        }
+
+        /* Conteneur principal */
+        .sae-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+            padding-bottom: 80vh; 
+        }
+
+        .card-full {
+            width: 100%;
+            background: var(--color-bg-secondary);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            line-height: 1.8;
+            /* FIX DÉCALAGE : Le titre s'arrête 100px avant le haut de l'écran */
+            scroll-margin-top: 100px; 
+            user-select: text;
+        }
+
+        .card-title {
+            color: var(--color-accent);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            font-family: var(--font-mono);
+        }
+
+        .section-label {
+            font-weight: bold;
+            color: var(--color-text-primary);
+            margin-top: 2rem;
+            display: block;
+            font-size: 1.1rem;
+            text-decoration: underline;
+            text-decoration-color: var(--color-accent);
+            text-underline-offset: 4px;
+        }
+
+        .ac-box {
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            background: rgba(16, 185, 129, 0.03);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .ac-item {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .ac-code {
+            color: var(--color-accent);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .sae-image-container {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .sae-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-accent);
+            text-decoration: none;
+            border-radius: 6px;
+            border: 1px solid var(--color-accent);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .download-btn:hover {
+            background: var(--color-accent);
+            color: #000;
+        }
+
+        @media (max-width: 1100px) {
+            .but-layout { flex-direction: column; }
+            .quick-nav-aside { width: 100%; position: relative; top: 0; }
+            .quick-nav-list { flex-direction: row; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    
+    <nav class="nav-main">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Accueil</a></li>
+                <li><a href="BUT_R_T.html" class="nav-link active">BUT</a></li>
+                <li><a href="CTF.html" class="nav-link">CTF</a></li>
+                <li><a href="Expériences.html" class="nav-link">Expériences</a></li>
+                <li><a href="Autre.html" class="nav-link">Autres</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <div class="section">
+            <div class="page-header">
+                <h1 class="page-title">Deuxième Année de BUT R&T</h1>
+                <p class="page-subtitle">Spécialisation en Cybersécurité et Réseaux Complexes</p>
+            </div>
+
+            <div class="but-layout">
+                <aside class="quick-nav-aside">
+                    <div class="quick-nav-title">SAE à voir :</div>
+                    <ul class="quick-nav-list">
+                        <li><a href="#sae301" class="quick-nav-link">SAE 3.01</a></li>
+                        <li><a href="#sae302" class="quick-nav-link">SAE 3.02</a></li>
+                        <li><a href="#sae303" class="quick-nav-link">SAE 3.03</a></li>
+                        <li><a href="#sae304" class="quick-nav-link">SAE 3.04 Cyber</a></li>
+                        <li><a href="#sae401" class="quick-nav-link">SAE Cyber 4.1</a></li>
+                    </ul>
+                </aside>
+
+                <div class="sae-container">
+
+                    <article class="card-full" id="sae301">
+                        <h2 class="card-title">SAE 3.01 : Mettre en place un système de transmission</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Le but premier de ce projet était de réaliser une prise connectée, donc qui permettait de faire un relais wifi en plus de la prise. Pour la partie Création de la plaquette électronique nous devions utiliser la plateforme EasyEda.</p>
+                        
+                        <span class="section-label">Groupe :</span>
+                        <p>Loic Maurer, Vladimir Nechaev, Bastian Jaeger, Aldéric Roesz</p>
+
+                        <span class="section-label">But :</span>
+                        <p>Pour ma part dans cette SAE je me suis occupé de faire les calculs et trouver les composants nécessaires au montage de la plaquette électronique ainsi qu'à la réalisation du Schéma, puis de sa version PCB qui est une version imprimable. Je me suis ensuite occupé de rédiger le rapport.</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Dès la première séance, nous nous sommes répartis les tâches, J'ai donc pris la partie réalisation de la partie "physique" du projet, réaliser le montage pour les composants.</p>
+
+                        <span class="section-label">Autres :</span>
+                        <p>Vous trouverez ci-dessous mes schémas techniques et PCB.</p>
+                        <div class="sae-image-container">
+                            <img src="documents/Schéma_SAE3.01.jpg" alt="Schéma SAE 3.01">
+                            <img src="documents/PCB_Schéma_SAE3.01.jpg" alt="PCB SAE 3.01">
+                        </div>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC22.01</span> Déployer et caractériser des systèmes de transmissions complexes.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card-full" id="sae302">
+                        <h2 class="card-title">SAE 3.02 : Mettre en place des applications communicantes</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Cette SAE fait suite à des cours Python que nous avons eus lors du début de cette seconde année, dans lesquels nous avions fait de l'utilisation d'interface graphique, des classes et de la gestion de threads.</p>
+                        
+                        <span class="section-label">Groupe :</span>
+                        <p>Seul</p>
+
+                        <span class="section-label">But :</span>
+                        <p>Le but du devoir était de réaliser un cluster de calcul, nous avions donc 3 machines virtuelles pour simuler nos 3 machines distantes (un client, un serveur master et un serveur slave), le but était que sur l'interface graphique du client on puisse demander l'exécution d'un calcul, que le master puisse envoyer ce calcul à un slave pour qu'il le traite et qu'il retourne la réponse au client. Il fallait ajouter la possibilité d'avoir plusieurs slaves pour un même langage de programmation histoire de ne pas charger trop le premier en condition réelle. Les langages de programmation étaient C, C++, Java et Python.</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Pour commencer j'ai monté des VMs Kali Linux connaissant déjà l'OS et y étant à l'aise elles me serviront à faire tourner mes serveurs Slaves et Master. J'ai ensuite commencé par faire les interfaces graphiques qui m'ont permis déjà de me faire une idée de l'organisation et de voir s'il me manquait quelque chose tel qu'un bouton/fonctionnalité ou autre. Une fois les interfaces graphiques faites j'ai fait décidé de faire la connexion entre les serveurs ce que je trouvais plus facile à faire avec une interface. Puis, pour finir j'ai fait la gestion des codes et l'échange/communication entre chaque serveur et client. J'ai aussi ajouté un système d'authentification dans lequel le mot de passe était comparé avec un hash.</p>
+
+                        <span class="section-label">Autres :</span>
+                        <p>Vous pouvez retrouver mon Github sur lequel il y a tout le projet ainsi qu'une vidéo de présentation du projet.</p>
+                        <a href="https://github.com/Link67000/SAE3.02" target="_blank" class="download-btn">🔗 Voir le projet sur GitHub</a>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC23.02</span> Développer une application à partir d’un cahier des charges donné.</li>
+                                <li class="ac-item"><span class="ac-code">AC23.03</span> Utiliser un protocole réseau pour programmer une application client/serveur.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card-full" id="sae303">
+                        <h2 class="card-title">SAE 3.03 : Concevoir un réseau informatique multisite</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Lors de cette SAE nous devions réaliser 3 maquettes GNS3 ou eveNG. Nous devions faire ce travail en groupe, et nous organiser pour connecter les maquettes entres elles.</p>
+                        
+                        <span class="section-label">Groupe :</span>
+                        <p>Thibaut Karcher, Aldéric Roesz</p>
+
+                        <span class="section-label">But :</span>
+                        <p>Comme dit précédement nous devions monter 3 maquettes GNS3, une maquette LAN, une maquette FAI et une maquette pour gérer les services. Pour ma part je me suis occupé de la partie LAN puis on s'est mis à deux pour faire les services. Dans cette partie LAN je devais avoir 4 Vlans, mettre en place un DHCP, faire de la redondance entre les switches (spanning-tree) et routeurs (vrrp).</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Comme cette SAE était à faire à 3 et que nous étions que 2 nous avons décider de prendre ce qui nous intéressait et de finir à deux sur la partie qui n'avait pas été choisie.</p>
+
+                        <span class="section-label">Autres :</span>
+                        <p>Vous retrouverez ci-dessous mon rapport concernant ma partie (LAN) qui retrace toute cette partie de la SAE et donc ce que j'ai pu réaliser pendant ce projet.</p>
+                        <a href="documents/rapport LAN Aldéric SAE 3.03.pdf" class="download-btn" download>📥 Télécharger le Rapport LAN (PDF)</a>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC21.01</span> Configurer et dépanner le routage dynamique dans un réseau.</li>
+                                <li class="ac-item"><span class="ac-code">AC21.02</span> Configurer les fonctions de base de la sécurité d’un réseau.</li>
+                                <li class="ac-item"><span class="ac-code">AC22.03</span> Mettre en place une connexion multi-site via un réseau opérateur.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card-full" id="sae304">
+                        <h2 class="card-title">SAE 3.04 Cyber : Découvrir le Pentesting</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Cette SAE a été réalisée dans le but de démarrer le parcours en cybersécurité. Nous avons donc eu des challenges dans diverses domaines de la cybersécurité offensive comme la cryptanalyse, le réseau et autres sur root-me.</p>
+                        
+                        <span class="section-label">Groupe :</span>
+                        <p>Seul</p>
+
+                        <span class="section-label">But :</span>
+                        <p>Le but était de réaliser le plus de challenges possible tout en comprenant les différentes spécialisations qu'on peut retrouver dans le pentest ( Web, Cryptanalyse, Forensic, réseau...).</p>
+
+                        <span class="section-label">Organisation :</span>
+                        <p>Ayant déjà fait énormément de ces challenges et ayant encore les programmes valides, je me suis directement mis à faire les challenges en programmation que je pouvais faire. J'ai ensuite fait par catégorie.</p>
+
+                        <span class="section-label">Autres :</span>
+                        <p>Vous retrouverez en bas de page notre rapport de projet contenant tout le travail réalisé ainsi que nos schémas et explications.</p>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC24.05Cyber</span> Connaître les différents types d’attaque.</li>
+                                <li class="ac-item"><span class="ac-code">AC25.02Cyber</span> Prendre en main des outils de test de pénétration réseau/système.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card-full" id="sae401">
+                        <h2 class="card-title">SAE Cyber 4.1 : Sécuriser un système d'information</h2>
+                        <span class="section-label">Présentation :</span>
+                        <p>Ce projet consistait à déployer et sécuriser une infrastructure de services réseau critiques au sein d'un système d'information.</p>
+                        
+                        <span class="section-label">Groupe :</span>
+                        <p>Thibaut Karcher, Aldéric Roesz</p>
+
+                        <span class="section-label">But :</span>
+                        <p>L'objectif était de monter et configurer des services réseau de manière sécurisée en utilisant des protocoles avec certificats SSL/TLS. Les services mis en place incluent : DHCP, DNS, LDAP, NFS avec authentification LDAP, ainsi que SMTP (Postfix) et IMAP (Dovecot).</p>
+
+                        <div class="ac-box">
+                            <strong>Apprentissages Critiques (AC) mobilisés :</strong>
+                            <ul>
+                                <li class="ac-item"><span class="ac-code">AC24.01Cyber</span> Connaître et utiliser les bonnes pratiques et les recommandations de cybersécurité.</li>
+                                <li class="ac-item"><span class="ac-code">AC24.02Cyber</span> Mettre en œuvre les outils fondamentaux de sécurisation d’une infrastructure du réseau.</li>
+                                <li class="ac-item"><span class="ac-code">AC24.03Cyber</span> Sécuriser les services.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Aldéric ROESZ - IUT de Colmar</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
